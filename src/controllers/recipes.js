@@ -4,6 +4,7 @@ const ADD_RECIPE = async (req, res) => {
   console.log("11111");
   try {
     const recipe = new recipeModel({
+      date: new Date(),
       category: req.body.category,
       title: req.body.title,
       recipeAuthor: req.body.recipeAuthor,

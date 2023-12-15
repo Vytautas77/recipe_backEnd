@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const recipeSchema = mongoose.Schema({
+  date: { type: String, required: true },
   category: { type: String, required: true },
   title: { type: String, required: true },
   recipeAuthor: { type: String, required: true },
