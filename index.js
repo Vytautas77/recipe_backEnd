@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import recipesRouter from "./src/routes/recipes.js";
 import usersRouter from "./src/routes/users.js";
+import commentsRouter from "./src/routes/comments.js";
 
 import "dotenv/config";
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(recipesRouter);
 app.use(usersRouter);
+app.use(commentsRouter);
 
 app.use((req, res, next) => {
   let rawData = "";
