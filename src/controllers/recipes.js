@@ -1,7 +1,6 @@
 import recipeModel from "../models/recipes.js";
 
 const ADD_RECIPE = async (req, res) => {
-  console.log("11111");
   try {
     const recipe = new recipeModel({
       date: new Date(),
@@ -11,9 +10,10 @@ const ADD_RECIPE = async (req, res) => {
       recipePhotoUrl: req.body.recipePhotoUrl,
       description: req.body.description,
       methodOfPreparation: req.body.methodOfPreparation,
-      owner_id: "userId",
+      owner_id: req.body.userId,
+      userName: req.body.fullName,
     });
-    console.log("Raw Request Body:", req.body);
+    // console.log("Raw Request Body:", req.body);
     const response = await recipe.save();
     return res.status(200).json({ response });
   } catch (err) {
@@ -31,6 +31,18 @@ const GET_RECIPES = async (req, res) => {
     res.status(500).json({ response: "Something went wrong!" });
   }
 };
+const GET_RECIPE_AUTH = async (req, res) => {
+  try {
+    const recipes = await recipeModel.find({
+      owner_id: req.body.userId,
+    });
+    return res.status(200).json({ recipes });
+  } catch (err) {
+    console.error("ERROR: ", err);
+    res.status(500).json({ response: "Something went wrong!" });
+  }
+};
+
 const GET_RECIPE_BY_ID = async (req, res) => {
   try {
     const recipe = await recipeModel.findOne({ _id: req.params.id });
@@ -55,4 +67,10 @@ const DELETE_RECIPE = async (req, res) => {
   }
 };
 
-export { ADD_RECIPE, GET_RECIPES, GET_RECIPE_BY_ID, DELETE_RECIPE };
+export {
+  ADD_RECIPE,
+  GET_RECIPES,
+  GET_RECIPE_BY_ID,
+  DELETE_RECIPE,
+  GET_RECIPE_AUTH,
+};
