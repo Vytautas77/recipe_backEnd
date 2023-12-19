@@ -10,6 +10,7 @@ const recipeSchema = mongoose.Schema({
   methodOfPreparation: { type: String, required: true },
   owner_id: { type: String, required: true },
   userName: { type: String, required: true },
+  recipesComments: { type: [], required: true },
 });
 
 export default mongoose.model("Recipe", recipeSchema);
