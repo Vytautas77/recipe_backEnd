@@ -7,6 +7,7 @@ const ADD_COMMENT_RECIPE_ID = async (req, res) => {
       commentText: req.body.commentText,
       date: new Date(),
       gainedLikesNumber: 0,
+      userName: req.body.fullName,
     });
     const id = comment._id.toString();
     comment.recipeId = id;
